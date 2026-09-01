@@ -1,0 +1,10 @@
+# Normalize line endings across platforms
+* text=auto eol=lf
+
+# Binary assets — never touch line endings
+*.png binary
+*.ico binary
+*.keras binary
+*.pkl binary
+*.pt binary
+*.csv binary

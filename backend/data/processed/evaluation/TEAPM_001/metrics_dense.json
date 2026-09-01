@@ -1,0 +1,70 @@
+{
+  "machine_id": "TEAPM_001",
+  "model_type": "dense",
+  "metrics": {
+    "precision": 1.0,
+    "recall": 0.627667,
+    "f1_score": 0.771247,
+    "auc_roc": 0.807576,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.372333,
+    "accuracy": 0.8883,
+    "confusion_matrix": {
+      "true_positive": 3766,
+      "true_negative": 14000,
+      "false_positive": 0,
+      "false_negative": 2234
+    },
+    "per_class_report": {
+      "Normal": {
+        "precision": 0.8623875816188247,
+        "recall": 1.0,
+        "f1-score": 0.9261096778461335,
+        "support": 14000.0
+      },
+      "Anomaly": {
+        "precision": 1.0,
+        "recall": 0.6276666666666667,
+        "f1-score": 0.7712471841081302,
+        "support": 6000.0
+      },
+      "accuracy": 0.8883,
+      "macro avg": {
+        "precision": 0.9311937908094123,
+        "recall": 0.8138333333333334,
+        "f1-score": 0.8486784309771318,
+        "support": 20000.0
+      },
+      "weighted avg": {
+        "precision": 0.9036713071331773,
+        "recall": 0.8883,
+        "f1-score": 0.8796509297247325,
+        "support": 20000.0
+      }
+    },
+    "total_samples": 20000,
+    "total_anomalies": 6000,
+    "total_normal": 14000,
+    "threshold": 0.225394,
+    "threshold_method": "mean + 2\u03c3 (training normal data)",
+    "mean_mse_normal": 0.015644,
+    "std_mse_normal": 0.012262,
+    "mean_mse_fault": 1.946637,
+    "std_mse_fault": 2.546348,
+    "separation_ratio": 124.4337
+  },
+  "plots": {
+    "roc_curve": "roc_curve_dense.png",
+    "mse_distribution": "mse_distribution_dense.png",
+    "confusion_matrix": "confusion_matrix_dense.png",
+    "threshold_sweep": "threshold_sweep_dense.png"
+  },
+  "evaluated_at": "2026-06-16T17:54:20.732034+00:00",
+  "ground_truth_mapping": {
+    "normal": 0,
+    "machine_fault": 1,
+    "sensor_freeze": 1,
+    "sensor_drift": 1,
+    "idle": 1
+  }
+}

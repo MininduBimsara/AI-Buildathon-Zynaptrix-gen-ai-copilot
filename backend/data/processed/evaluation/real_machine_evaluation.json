@@ -1,0 +1,50 @@
+{
+  "PUMP-001": {
+    "machine_id": "PUMP-001",
+    "threshold": 0.6994,
+    "mu_normal": 0.1044,
+    "mu_fault": 363.54,
+    "separation_ratio": 3481.1,
+    "precision": 0.988,
+    "recall": 0.6568,
+    "f1": 0.7891,
+    "auc_roc": 0.9165,
+    "fpr": 0.0034,
+    "tp": 3941,
+    "fp": 48,
+    "fn": 2059,
+    "tn": 13952
+  },
+  "LATHE-002": {
+    "machine_id": "LATHE-002",
+    "threshold": 0.7203,
+    "mu_normal": 2.1209,
+    "mu_fault": 161.36,
+    "separation_ratio": 76.1,
+    "precision": 0.4218,
+    "recall": 0.7292,
+    "f1": 0.5344,
+    "auc_roc": 0.7311,
+    "fpr": 0.4284,
+    "tp": 4375,
+    "fp": 5998,
+    "fn": 1625,
+    "tn": 8002
+  },
+  "TURBINE-003": {
+    "machine_id": "TURBINE-003",
+    "threshold": 0.73,
+    "mu_normal": 4.8477,
+    "mu_fault": 3964.32,
+    "separation_ratio": 817.8,
+    "precision": 0.296,
+    "recall": 0.7347,
+    "f1": 0.422,
+    "auc_roc": 0.7351,
+    "fpr": 0.7489,
+    "tp": 4408,
+    "fp": 10484,
+    "fn": 1592,
+    "tn": 3516
+  }
+}

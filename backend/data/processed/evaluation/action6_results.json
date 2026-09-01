@@ -1,0 +1,81 @@
+{
+  "evaluated_at": "2026-06-21T17:22:42.062465+00:00",
+  "total_queries": 6,
+  "hits_in_top2": 6,
+  "top2_hit_rate": 1.0,
+  "archived_incidents": 6,
+  "machines_covered": [
+    "PUMP-001",
+    "LATHE-002",
+    "TURBINE-003",
+    "TEAPM_001"
+  ],
+  "per_query": [
+    {
+      "machine_id": "PUMP-001",
+      "target_fault": "bearing_overheat",
+      "target_id": 15,
+      "top2_ids": [
+        15,
+        18
+      ],
+      "hit": true,
+      "rank": 1
+    },
+    {
+      "machine_id": "LATHE-002",
+      "target_fault": "spindle_vibration",
+      "target_id": 16,
+      "top2_ids": [
+        16,
+        15
+      ],
+      "hit": true,
+      "rank": 1
+    },
+    {
+      "machine_id": "TURBINE-003",
+      "target_fault": "blade_erosion",
+      "target_id": 17,
+      "top2_ids": [
+        17,
+        19
+      ],
+      "hit": true,
+      "rank": 1
+    },
+    {
+      "machine_id": "PUMP-001",
+      "target_fault": "mechanical_seal_leak",
+      "target_id": 18,
+      "top2_ids": [
+        18,
+        15
+      ],
+      "hit": true,
+      "rank": 1
+    },
+    {
+      "machine_id": "TURBINE-003",
+      "target_fault": "lube_oil_pressure_drop",
+      "target_id": 19,
+      "top2_ids": [
+        19,
+        17
+      ],
+      "hit": true,
+      "rank": 1
+    },
+    {
+      "machine_id": "TEAPM_001",
+      "target_fault": "analog_voltage_fault",
+      "target_id": 20,
+      "top2_ids": [
+        20,
+        16
+      ],
+      "hit": true,
+      "rank": 1
+    }
+  ]
+}

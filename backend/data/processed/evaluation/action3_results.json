@@ -1,0 +1,290 @@
+{
+  "evaluated_at": "2026-06-16T09:55:52.036496+00:00",
+  "rag_retrieval": {
+    "top3_precision": 0.6,
+    "hits": 9,
+    "total": 15,
+    "per_query": [
+      {
+        "query": "safety precautions before removing power from the AC drive",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "All chunks provide safety precautions related to removing power from the AC drive."
+      },
+      {
+        "query": "how to connect motor terminals to the 1336 IMPACT drive",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": false,
+        "reason": "None of the chunks provide specific instructions on connecting motor terminals to the drive."
+      },
+      {
+        "query": "what to check if the drive trips on overcurrent fault",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "Chunk 2 provides information on overcurrent fault code 12019 and suggested actions."
+      },
+      {
+        "query": "parameter settings for motor overload protection",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": false,
+        "reason": "None of the chunks provide information on motor overload protection parameter settings."
+      },
+      {
+        "query": "procedure for replacing a circuit board in the drive",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "Chunks 1 and 2 contain information related to replacing components and removing the circuit board platform."
+      },
+      {
+        "query": "NEC code requirements for drive installation wiring",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "Chunks 1 and 2 mention NEC requirements for wiring installation."
+      },
+      {
+        "query": "electrostatic discharge precautions when servicing drive boards",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "The chunks mention electrostatic discharge precautions and procedures for handling drive boards."
+      },
+      {
+        "query": "how to verify bus voltage before working on drive terminals",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "All chunks provide instructions on verifying bus voltage by measuring between +DC/\u2013DC Brake Terminals."
+      },
+      {
+        "query": "troubleshooting drive fault codes and alarms",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "All chunks provide detailed information on fault codes and troubleshooting steps."
+      },
+      {
+        "query": "L Option Board contact closure interface wiring",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "Chunk 1 mentions the L Option Board's use of contact closures for interfacing signals."
+      },
+      {
+        "query": "how to set acceleration and deceleration ramp times",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": false,
+        "reason": "None of the chunks provide specific instructions on setting acceleration and deceleration ramp times."
+      },
+      {
+        "query": "ground wiring requirements for the drive installation",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": false,
+        "reason": "The chunks do not contain information about ground wiring requirements for drive installation."
+      },
+      {
+        "query": "procedure for drive startup and initial commissioning",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": false,
+        "reason": "The chunks do not provide specific procedures for drive startup and initial commissioning."
+      },
+      {
+        "query": "how to adjust output frequency limits",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": false,
+        "reason": "The chunks do not contain information on adjusting output frequency limits."
+      },
+      {
+        "query": "what PPE is required when working on energised drive cabinets",
+        "manual_id": "TEA_P_M_001",
+        "chunks_retrieved": 3,
+        "relevant": true,
+        "reason": "The chunks reference NFPA 70E, which includes PPE guidelines for working on energized equipment."
+      }
+    ]
+  },
+  "safety_critic": {
+    "total_procedures": 10,
+    "first_pass_count": 3,
+    "retry_pass_count": 2,
+    "fail_safe_count": 5,
+    "first_pass_rate": 0.3,
+    "retry_pass_rate": 0.2,
+    "fail_safe_rate": 0.5,
+    "classification_accuracy": 0.8,
+    "per_procedure": [
+      {
+        "id": "P01",
+        "expected_compliant": true,
+        "first_pass_result": true,
+        "outcome": "first_pass",
+        "correct_classification": true,
+        "violations_flagged": []
+      },
+      {
+        "id": "P02",
+        "expected_compliant": false,
+        "first_pass_result": false,
+        "outcome": "fail_safe",
+        "correct_classification": true,
+        "violations_flagged": [
+          "NO ENERGISED WORK: Procedure involves working on energised equipment",
+          "LOTO: No de-energisation or lockout/tagout procedure mentioned",
+          "PPE: No specification of appropriate PPE"
+        ]
+      },
+      {
+        "id": "P03",
+        "expected_compliant": true,
+        "first_pass_result": true,
+        "outcome": "first_pass",
+        "correct_classification": true,
+        "violations_flagged": []
+      },
+      {
+        "id": "P04",
+        "expected_compliant": false,
+        "first_pass_result": false,
+        "outcome": "fail_safe",
+        "correct_classification": true,
+        "violations_flagged": [
+          "LOTO: Must include de-energisation",
+          "NO ENERGISED WORK: Must prohibit working on energised equipment"
+        ]
+      },
+      {
+        "id": "P05",
+        "expected_compliant": true,
+        "first_pass_result": true,
+        "outcome": "first_pass",
+        "correct_classification": true,
+        "violations_flagged": []
+      },
+      {
+        "id": "P06",
+        "expected_compliant": false,
+        "first_pass_result": false,
+        "outcome": "fail_safe",
+        "correct_classification": true,
+        "violations_flagged": [
+          "LOTO not performed: No de-energisation or lockout/tagout/verification of zero energy mentioned.",
+          "NO ENERGISED WORK: Procedure involves working on equipment while it is decelerating, which is considered energised."
+        ]
+      },
+      {
+        "id": "P07",
+        "expected_compliant": true,
+        "first_pass_result": false,
+        "outcome": "retry_pass",
+        "correct_classification": false,
+        "violations_flagged": [
+          "PPE does not specify safety footwear",
+          "No verification of zero energy",
+          "No prohibition of working on energised equipment"
+        ]
+      },
+      {
+        "id": "P08",
+        "expected_compliant": false,
+        "first_pass_result": false,
+        "outcome": "fail_safe",
+        "correct_classification": true,
+        "violations_flagged": [
+          "LOTO: Must include de-energisation (lockout + tagout + verify zero energy)",
+          "NO ENERGISED WORK: Must prohibit working on energised equipment"
+        ]
+      },
+      {
+        "id": "P09",
+        "expected_compliant": true,
+        "first_pass_result": false,
+        "outcome": "retry_pass",
+        "correct_classification": false,
+        "violations_flagged": [
+          "NO ENERGISED WORK: Procedure does not explicitly prohibit working on energised equipment."
+        ]
+      },
+      {
+        "id": "P10",
+        "expected_compliant": false,
+        "first_pass_result": false,
+        "outcome": "fail_safe",
+        "correct_classification": true,
+        "violations_flagged": [
+          "NO ENERGISED WORK: Procedure involves working on energised equipment",
+          "LOTO: No mention of de-energisation or lockout/tagout procedures"
+        ]
+      }
+    ]
+  },
+  "institutional_memory": {
+    "total_queries": 5,
+    "hits_in_top2": 5,
+    "top2_hit_rate": 1.0,
+    "per_query": [
+      {
+        "query": "pump bearing high temperature overheating impeller clearance",
+        "target_machine": "PUMP-001",
+        "target_id": 7,
+        "top2_ids": [
+          7,
+          10
+        ],
+        "hit_in_top2": true,
+        "rank": 1
+      },
+      {
+        "query": "spindle vibration bearing replacement lathe RPM",
+        "target_machine": "LATHE-002",
+        "target_id": 8,
+        "top2_ids": [
+          8
+        ],
+        "hit_in_top2": true,
+        "rank": 1
+      },
+      {
+        "query": "turbine blade erosion tip clearance efficiency drop",
+        "target_machine": "TURBINE-003",
+        "target_id": 9,
+        "top2_ids": [
+          9,
+          11
+        ],
+        "hit_in_top2": true,
+        "rank": 1
+      },
+      {
+        "query": "mechanical seal leak motor current overload pump",
+        "target_machine": "PUMP-001",
+        "target_id": 10,
+        "top2_ids": [
+          10,
+          7
+        ],
+        "hit_in_top2": true,
+        "rank": 1
+      },
+      {
+        "query": "oil lube pressure drop filter clogged turbine bearing",
+        "target_machine": "TURBINE-003",
+        "target_id": 11,
+        "top2_ids": [
+          11,
+          9
+        ],
+        "hit_in_top2": true,
+        "rank": 1
+      }
+    ]
+  }
+}

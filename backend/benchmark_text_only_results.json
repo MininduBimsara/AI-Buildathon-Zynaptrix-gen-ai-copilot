@@ -1,0 +1,106 @@
+{
+  "manual_id": "TEA_P_M_001",
+  "model": "gpt-4o",
+  "queries": [
+    {
+      "query_id": "Q01",
+      "mean_total_s": 2.754,
+      "std_total_s": 0.111,
+      "p95_total_s": 2.837,
+      "mean_embed_s": 0.295,
+      "mean_retrieve_s": 1.065,
+      "mean_llm_s": 1.394,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q02",
+      "mean_total_s": 2.871,
+      "std_total_s": 0.146,
+      "p95_total_s": 2.879,
+      "mean_embed_s": 0.251,
+      "mean_retrieve_s": 1.052,
+      "mean_llm_s": 1.568,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q03",
+      "mean_total_s": 3.077,
+      "std_total_s": 0.194,
+      "p95_total_s": 3.191,
+      "mean_embed_s": 0.366,
+      "mean_retrieve_s": 1.036,
+      "mean_llm_s": 1.675,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q04",
+      "mean_total_s": 3.04,
+      "std_total_s": 0.115,
+      "p95_total_s": 3.076,
+      "mean_embed_s": 0.441,
+      "mean_retrieve_s": 1.057,
+      "mean_llm_s": 1.543,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q05",
+      "mean_total_s": 2.997,
+      "std_total_s": 0.32,
+      "p95_total_s": 3.287,
+      "mean_embed_s": 0.335,
+      "mean_retrieve_s": 1.063,
+      "mean_llm_s": 1.599,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q06",
+      "mean_total_s": 2.898,
+      "std_total_s": 0.292,
+      "p95_total_s": 3.086,
+      "mean_embed_s": 0.368,
+      "mean_retrieve_s": 1.064,
+      "mean_llm_s": 1.466,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q07",
+      "mean_total_s": 3.392,
+      "std_total_s": 0.671,
+      "p95_total_s": 3.67,
+      "mean_embed_s": 0.369,
+      "mean_retrieve_s": 1.067,
+      "mean_llm_s": 1.955,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q08",
+      "mean_total_s": 3.037,
+      "std_total_s": 0.28,
+      "p95_total_s": 3.086,
+      "mean_embed_s": 0.363,
+      "mean_retrieve_s": 1.101,
+      "mean_llm_s": 1.573,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q09",
+      "mean_total_s": 3.776,
+      "std_total_s": 0.578,
+      "p95_total_s": 4.049,
+      "mean_embed_s": 0.28,
+      "mean_retrieve_s": 1.055,
+      "mean_llm_s": 2.442,
+      "n_runs": 5
+    },
+    {
+      "query_id": "Q10",
+      "mean_total_s": 2.825,
+      "std_total_s": 0.21,
+      "p95_total_s": 2.932,
+      "mean_embed_s": 0.313,
+      "mean_retrieve_s": 1.05,
+      "mean_llm_s": 1.462,
+      "n_runs": 5
+    }
+  ]
+}
