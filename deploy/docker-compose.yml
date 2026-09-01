@@ -1,0 +1,45 @@
+name: zynaptrix-copilot
+
+# One-VM deployment: FastAPI backend + Next.js frontend.
+# All stateful services (Postgres, blob storage, telemetry, LLM) are external SaaS
+# (Neon, Cloudinary, InfluxDB Cloud, Alibaba DashScope) — nothing to run here.
+#
+#   cp .env.example .env   # then fill it in
+#   docker compose up -d --build
+
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    image: zynaptrix-backend:latest
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8000:8000"          # browser talks to the API directly on :8000
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s     # TensorFlow + Torch import is slow on first boot
+    deploy:
+      resources:
+        limits:
+          memory: 6g
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+      args:
+        # Baked into the JS bundle at build time — must be the URL the *browser* uses.
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:?set NEXT_PUBLIC_API_URL in .env}
+    image: zynaptrix-frontend:latest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "80:3000"
+    depends_on:
+      - backend

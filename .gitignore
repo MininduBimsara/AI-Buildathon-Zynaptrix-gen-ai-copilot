@@ -27,4 +27,3 @@ Thumbs.db
 
 # ── Local tooling ────────────────────────────────────────────────────────
 .claude/
-docker-compose.yml
