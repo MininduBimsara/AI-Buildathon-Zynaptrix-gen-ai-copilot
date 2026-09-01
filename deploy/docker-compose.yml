@@ -43,3 +43,11 @@ services:
       - "80:3000"
     depends_on:
       - backend
+
+networks:
+  default:
+    driver_opts:
+      # Some hosts (Docker Desktop/WSL2, VPNs, certain VPC overlays) drop the
+      # large TLS handshake packets at the default 1500 MTU, which shows up as
+      # "SSL SYSCALL error: EOF" / hung Postgres connections. 1400 is safe.
+      com.docker.network.driver.mtu: "1400"
