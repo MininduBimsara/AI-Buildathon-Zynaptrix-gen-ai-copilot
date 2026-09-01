@@ -14,8 +14,10 @@ RUN apt-get update && apt-get install -y \
 # Optimize layer caching: Install requirements before copying entire codebase
 COPY requirements.txt .
 
-# Install heavy ML stack (--no-cache-dir reduces output image size dramatically)
-RUN pip install --no-cache-dir -r requirements.txt
+# Install heavy ML stack (--no-cache-dir reduces output image size dramatically).
+# Generous retries/timeout: the TensorFlow + Torch wheels are ~600 MB each and
+# stall on slow links, which otherwise fails the whole build.
+RUN pip install --no-cache-dir --retries 5 --timeout 180 --prefer-binary -r requirements.txt
 
 # Copy the rest of the backend codebase
 COPY . .
