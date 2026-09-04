@@ -3,6 +3,14 @@
 .env.*
 !.env.example
 
+# Stray copies of a REAL env file that the dotted patterns above miss —
+# e.g. backend/env.bak2, env.local, prod.env. These hold live API keys and
+# database passwords; one `git add .` would publish them permanently.
+env
+env.*
+*.env
+!*.env.example
+
 # ── Python ───────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
