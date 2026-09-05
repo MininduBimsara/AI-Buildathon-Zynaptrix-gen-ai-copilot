@@ -1,22 +1,44 @@
 name: zynaptrix-copilot
 
-# One-VM deployment: FastAPI backend + Next.js frontend.
-# All stateful services (Postgres, blob storage, telemetry, LLM) are external SaaS
-# (Neon, Cloudinary, InfluxDB Cloud, Alibaba DashScope) — nothing to run here.
+# Deployment topology. All stateful services (Postgres, blob storage, telemetry,
+# LLM) are external SaaS (Neon, Cloudinary, InfluxDB Cloud, Alibaba DashScope) —
+# nothing stateful runs here.
 #
 #   cp .env.example .env   # then fill it in
-#   docker compose up -d --build
+#
+# Pick ONE of these, depending on where the frontend lives:
+#
+#   Frontend on Vercel (recommended — needs API_DOMAIN set in .env):
+#       docker compose --profile tls up -d
+#     → backend behind Caddy on https://api.yourdomain.com, with a real cert.
+#       Mandatory: an https:// Vercel page cannot call an http:// API.
+#
+#   Frontend on this same VM (no domain needed):
+#       docker compose --profile bundled up -d
+#     → frontend on :80, backend on :8000, both plain http.
+#
+#   Backend only, no TLS (local testing / curl):
+#       docker compose up -d
+#
+# NOTE: the `tls` and `bundled` profiles both want port 80. Run one, not both.
 
 services:
   backend:
     build:
       context: ../backend
       dockerfile: Dockerfile
+      args:
+        # Alibaba's PyPI mirror makes the ~1.5 GB of ML wheels download far
+        # faster from an ECS instance. Override to https://pypi.org/simple
+        # when building anywhere else.
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.org/simple}
     image: zynaptrix-backend:latest
     restart: unless-stopped
     env_file: .env
     ports:
-      - "8000:8000"          # browser talks to the API directly on :8000
+      # Kept published even behind Caddy: lets you curl :8000/health directly to
+      # tell "app is broken" apart from "TLS/proxy is broken".
+      - "8000:8000"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
@@ -28,14 +50,36 @@ services:
         limits:
           memory: 6g
 
+  # ── TLS terminator. Only needed when the frontend is NOT on this VM. ────────
+  caddy:
+    image: caddy:2-alpine
+    profiles: ["tls"]
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "80:80"      # required for the Let's Encrypt HTTP-01 challenge
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # Named volumes so issued certificates survive `docker compose down`.
+      # Without these you re-request certs on every restart and will eventually
+      # hit Let's Encrypt's rate limit.
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+
+  # ── Frontend, only when you are NOT using Vercel. ──────────────────────────
   frontend:
     build:
       context: ../frontend
       dockerfile: Dockerfile
       args:
-        # Baked into the JS bundle at build time — must be the URL the *browser* uses.
+        # Baked into the JS bundle at build time — must be the URL the *browser*
+        # uses, not an internal service name.
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:?set NEXT_PUBLIC_API_URL in .env}
     image: zynaptrix-frontend:latest
+    profiles: ["bundled"]
     restart: unless-stopped
     environment:
       - NODE_ENV=production
@@ -43,6 +87,10 @@ services:
       - "80:3000"
     depends_on:
       - backend
+
+volumes:
+  caddy_data:
+  caddy_config:
 
 networks:
   default:

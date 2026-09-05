@@ -1,0 +1,28 @@
+# Caddy config — terminates TLS for the backend API.
+#
+# Required because the frontend is on Vercel (https://). A browser on an https
+# page refuses to call http:// or ws:// — so the API must be https/wss too.
+#
+# {$API_DOMAIN} comes from deploy/.env. Caddy obtains and renews a Let's Encrypt
+# certificate automatically; nothing to install or cron.
+
+{
+	# Where Let's Encrypt sends expiry warnings. Optional but recommended.
+	email {$ACME_EMAIL}
+}
+
+{$API_DOMAIN} {
+	# reverse_proxy passes WebSocket upgrades through natively, so /ws/telemetry
+	# works over wss:// with no extra configuration.
+	reverse_proxy backend:8000
+
+	# Manual PDFs are uploaded through this proxy; don't let a big one 413.
+	request_body {
+		max_size 200MB
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}

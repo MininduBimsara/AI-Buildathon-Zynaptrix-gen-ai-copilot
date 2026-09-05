@@ -65,11 +65,17 @@ app.mount("/static", StaticFiles(directory=DATA_DIR), name="static")
 logger.info(f"✅ Static assets mounted from: {DATA_DIR}")
 
 # CORS Middleware (Strict Security Binding)
-allowed_origin = settings.frontend_url.rstrip("/")
+# FRONTEND_URL may hold a comma-separated list of origins, so one deployment can
+# serve both a bare IP and a domain without a rebuild. See settings.allowed_origins.
+allowed_origins = settings.allowed_origins
+logger.info(f"✅ CORS allowed origins: {allowed_origins}")
+if settings.frontend_url_regex:
+    logger.info(f"✅ CORS origin regex: {settings.frontend_url_regex}")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[allowed_origin], 
+    allow_origins=allowed_origins,
+    allow_origin_regex=settings.frontend_url_regex,
     allow_credentials=True,  # Changed to True to allow secure cookie/socket sharing
     allow_methods=["*"],
     allow_headers=["*"],

@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     embedding_dim: int = Field(2048, alias="EMBEDDING_DIM")
 
     log_level: str = Field("INFO", alias="LOG_LEVEL")
+    # Optional CORS regex, for hosts that mint a new origin per deployment.
+    # Vercel preview builds land on e.g. https://myapp-git-feat-x-team.vercel.app,
+    # which no fixed FRONTEND_URL list can cover.
+    frontend_url_regex: Optional[str] = Field(None, alias="FRONTEND_URL_REGEX")
     # Optional Service Overrides
     api_url: str = Field("http://127.0.0.1:8000", alias="API_URL")
     frontend_url: str = Field("http://localhost:3000", alias="FRONTEND_URL")
@@ -35,6 +39,16 @@ class Settings(BaseSettings):
     cloudinary_api_key: Optional[str] = Field(None, alias="CLOUDINARY_API_KEY")
     cloudinary_api_secret: Optional[str] = Field(None, alias="CLOUDINARY_API_SECRET")
     
+    @property
+    def allowed_origins(self) -> list[str]:
+        """Browser origins allowed by CORS.
+
+        FRONTEND_URL accepts a comma-separated list so a deployment can serve the
+        same API to more than one origin (e.g. the ECS public IP and a domain, or
+        an IP plus http://localhost:3000 while debugging) without a code change.
+        """
+        return [o.strip().rstrip("/") for o in self.frontend_url.split(",") if o.strip()]
+
     @property
     def database_url(self) -> str:
         if self.database_url_env:

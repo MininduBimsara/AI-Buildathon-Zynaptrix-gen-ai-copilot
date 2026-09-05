@@ -1,5 +1,13 @@
-# Environments
+# Environments / secrets.
+# These patterns must stay broad: anything matching them is a real credential
+# file, and `COPY . .` would bake it into a published image layer permanently.
 .env
+.env.*
+!.env.example
+env
+env.*
+*.env
+!*.env.example
 .venv
 venv/
 ENV/

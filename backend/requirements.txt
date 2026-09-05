@@ -1,39 +1,44 @@
+# ── Web / API ────────────────────────────────────────────────────────────────
 fastapi
 uvicorn[standard]
 pydantic
 pydantic-settings
+python-multipart
+python-dotenv
+requests
+
+# ── Data layer ───────────────────────────────────────────────────────────────
 sqlalchemy
 psycopg2-binary
 pgvector
-pymupdf
-easyocr
-camelot-py[cv]
-ultralytics
-transformers
-torch
-torchvision
-opencv-python-headless
-huggingface_hub
+influxdb-client
+cloudinary
+
+# ── AI / agents (all LLM calls go through the OpenAI-compatible client) ──────
 openai>=2.30.0
 langchain
-langchain-text-splitters
-nest-asyncio
 langchain-core
+langchain-text-splitters
 langgraph
-influxdb-client
+nest-asyncio
+
+# ── Anomaly detection ────────────────────────────────────────────────────────
 tensorflow
 scikit-learn
 pandas
 numpy
-python-multipart
-python-dotenv
-cloudinary
-Pillow
-matplotlib
-plotly
-pytest
-requests
-sentence-transformers
-streamlit
 scipy
-pypdf
+matplotlib
+
+# ── Multimodal manual ingestion ──────────────────────────────────────────────
+# ultralytics pulls in torch + torchvision (YOLOv8 layout detection + Mobile SAM).
+# easyocr and camelot-py are the OCR / table-extraction fallbacks.
+# All three are imported defensively (try/except ImportError) — dropping them
+# gives a much smaller "serve-only" image at the cost of PDF figure/table
+# ingestion. See deploy/ALIBABA_CLOUD_DEPLOYMENT.md ("Slim image" appendix).
+pymupdf
+opencv-python-headless
+Pillow
+ultralytics
+easyocr
+camelot-py[cv]
